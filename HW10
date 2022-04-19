@@ -1,0 +1,76 @@
+For this assignment, I worked individually. 
+
+Are there some days of the week where more accidents happen than on others (use variable DAY_WEEK)?
+
+  > ggplot(acc, aes(x = DAY_WEEK)) + 
+  +     geom_bar() +
+  +     coord_flip()
+
+To determine this, I made a barchart with the values of accidents that occur for each day of the week. From this bar chart, I can determine that the most accidents occur on day 7 of the week and the second most occur on the first day of the week. I can also determine that the least amount of accidents occur on the third and fourt days of the week. Some days only have around 4000 accidents per day while others have around 6000 accidents per day. 
+
+What time of the day do accidents happen (use variable HOUR)?
+
+> ggplot(acc, aes(x = HOUR)) + 
++     geom_bar() +
++     coord_flip()
+
+To determine this, I also made a barchart diplaying the value of accidents for each hour of the day. It appears that most accidents occur later in the day, at nightime, typically with hours 17-23 being the peak where the most accidents occur, however our chart shows that accidents do occur at all times of the day, just mostly later in the day.
+
+What is the number of accidents with at least one drunk driver (use variable DRUNK_DR)?
+
+> ggplot(acc, aes(x = DRUNK_DR)) + 
++     geom_bar() +
++     coord_flip()
+
+The bar plot of accidents with drunk drivers reveals that around 8000 of the accidents in this population involve a drunk driver. 
+
+
+Connect to the person table. Identify drivers (PER_TYP == 1, see fars manual ) and subset on them.
+
+> person <- read.csv("https://raw.githubusercontent.com/DS202-at-ISU/labs/master/data/fars2016/accident.csv", stringsAsFactors = FALSE)
+
+Join accident and driver table (work out which variable(s) to use)
+
+> total <- rbind(acc, person)
+
+Tally the number of accidents by day of the week (DAY_WEEK), hour of the day (HOUR) and gender (SEX). 
+
+> total %>% 
++     count(DAY_WEEK)
+  DAY_WEEK     n
+1        1 10606
+2        2  9002
+3        3  8258
+4        4  8776
+5        5  9324
+6        6 10704
+7        7 12208
+
+> total %>% 
++     count(HOUR)
+   HOUR    n
+1     0 2692
+2     1 2528
+3     2 2706
+4     3 2042
+5     4 1682
+6     5 2284
+7     6 2574
+8     7 2278
+9     8 1922
+10    9 1978
+11   10 2032
+12   11 2456
+13   12 2628
+14   13 3028
+15   14 3134
+16   15 3462
+17   16 3616
+18   17 3826
+19   18 3968
+20   19 3804
+21   20 3838
+22   21 3602
+23   22 3300
+24   23 2966
+25   99  532
